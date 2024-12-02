@@ -1,0 +1,28 @@
+curl --location --request POST 'https://crm.belmar.pro/api/v1/addlead' \
+--header 'token: ba67df6a-a17c-476f-8e95-bcdb75ed3958' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "firstName": "John",
+    "lastName": "Doe",
+    "phone": "+44 1234 567890",
+    "email": "john.doe@example.com",
+    "countryCode": "GB",
+    "box_id": 28,
+    "offer_id": 5,
+    "landingUrl": "http://example.com",
+    "ip": "192.168.1.1",
+    "password": "qwerty12",
+    "language": "en"
+}'
+
+###
+
+curl --location --request POST 'https://crm.belmar.pro/api/v1/getstatuses'
+   --header 'token: ba67df6a-a17c-476f-8e95-bcdb75ed3958'
+   --header 'Content-Type: application/json'
+   --data-raw '{
+       "date_from" : "2022-12-01 00:00:00", // default -30days, max -60days
+       "date_to" : "2022-12-31 23:59:59",   // default now
+       "page" : 0,                          // default 0
+       "limit" : 100                        // default 100, max 500
+   }'

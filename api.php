@@ -3,7 +3,6 @@ function addLead($data) {
     $url = 'https://crm.belmar.pro/api/v1/addlead';
     $token = 'ba67df6a-a17c-476f-8e95-bcdb75ed3958';
 
-    // Формирование данных для отправки
     $payload = [
         "firstName" => $data['firstName'],
         "lastName" => $data['lastName'],
@@ -13,7 +12,7 @@ function addLead($data) {
         "box_id" => 28,
         "offer_id" => 5,
         "landingUrl" => $_SERVER['HTTP_HOST'],
-        "ip" => $_SERVER['REMOTE_ADDR'],
+        "ip" => "192.168.0.102",
         "password" => "qwerty12",
         "language" => "en"
     ];
@@ -87,7 +86,7 @@ function sendRequest($url, $params) {
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    $curlError = curl_error($ch); // Для проверки ошибок cURL
+    $curlError = curl_error($ch);
     $response = curl_exec($ch);
     curl_close($ch);
 // Отладка

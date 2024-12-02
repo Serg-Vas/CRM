@@ -4,26 +4,28 @@ include 'api.php';
 $date_from = isset($_GET['date_from']) ? $_GET['date_from'] : date('Y-m-d 00:00:00', strtotime('-30 days'));
 $date_to = isset($_GET['date_to']) ? $_GET['date_to'] : date('Y-m-d 23:59:59');
 $response = getStatuses($date_from, $date_to);
-echo '<pre>';
-print_r($response);
-echo '</pre>';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Статусы лидов</title>
+    <title>Статуси лідів</title>
 </head>
 <body>
-    <h1>Статусы лидов</h1>
+    <h1>Статуси лідів</h1>
     <form method="get">
-        <label>Фильтр по дате: <input type="date" name="date" value="<?php echo htmlspecialchars($date); ?>"></label>
-        <button type="submit">Фильтровать</button>
+        <label>Дата від:
+            <input type="date" name="date_from" value="<?php echo htmlspecialchars(explode(' ', $date_from)[0]); ?>">
+        </label>
+        <label>Дата до:
+            <input type="date" name="date_to" value="<?php echo htmlspecialchars(explode(' ', $date_to)[0]); ?>">
+        </label>
+        <button type="submit">Фільтрувати</button>
     </form>
     <?php if ($response['success'] && isset($response['data']['data']) && is_array($response['data']['data'])): ?>
-    <table>
+    <table border="1" cellpadding="5" cellspacing="0">
         <thead>
             <tr>
                 <th>ID</th>
@@ -44,9 +46,9 @@ echo '</pre>';
         </tbody>
     </table>
 <?php else: ?>
-    <p style="color: red;">Нет данных для отображения или ошибка API: <?= htmlspecialchars($response['message'] ?? 'Неизвестная ошибка'); ?></p>
+    <p style="color: red;">Немає даних для відображення або помилка API: <?= htmlspecialchars($response['message'] ?? 'Неизвестная ошибка'); ?></p>
 <?php endif; ?>
 
-    <a href="index.php">Вернуться к форме</a>
+    <a href="index.php">Повернутися до форми</a>
 </body>
 </html>
